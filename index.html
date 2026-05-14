@@ -194,7 +194,11 @@
 
     /* ===== MEMBERS ===== */
     #members { background: var(--light); }
-    .members-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+    .members-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
     .member-card {
       background: var(--white); border-radius: 20px; overflow: hidden;
       box-shadow: var(--shadow); transition: all var(--transition); text-align: center;
@@ -204,14 +208,18 @@
       width: 100%; aspect-ratio: 3/4;
       object-fit: cover; object-position: top; display: block;
     }
-    .member-info { padding: 2rem 1.5rem; }
+    .member-info { padding: 1.5rem 1rem; }
     .member-role {
       display: inline-block; font-size: 0.75rem; font-weight: 600;
       color: var(--accent); background: rgba(62,146,204,0.1);
       padding: 0.3rem 0.9rem; border-radius: 100px; margin-bottom: 0.8rem;
     }
-    .member-info h3 { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 0.4rem; }
-    .member-info p { font-size: 0.85rem; color: var(--gray); line-height: 1.7; }
+    .member-role.advisor {
+      color: #b8860b;
+      background: rgba(184,134,11,0.1);
+    }
+    .member-info h3 { font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 0.4rem; }
+    .member-info p { font-size: 0.82rem; color: var(--gray); line-height: 1.7; }
 
     /* ===== PROCESS ===== */
     #process { background: var(--white); }
@@ -403,7 +411,7 @@
         <div class="hero-card">
           <div class="hero-stats">
             <div class="stat-item">
-              <div class="stat-num">3</div>
+              <div class="stat-num">4</div>
               <div class="stat-label">創業メンバー</div>
             </div>
             <div class="stat-item">
@@ -513,7 +521,7 @@
       <div class="section-header fade-in">
         <span class="section-tag">Members</span>
         <h2>メンバー紹介</h2>
-        <p>日本一のパチンカスを目指す、3名の精鋭メンバーをご紹介します。</p>
+        <p>日本一のパチンカスを目指す、4名の精鋭メンバーをご紹介します。</p>
         <div class="divider"></div>
       </div>
       <div class="members-grid">
@@ -545,6 +553,16 @@
             <span class="member-role">取締役</span>
             <h3>垂井 吾叶夢</h3>
             <p>冷静な分析力でチームを支える参謀役。台の癖を読む能力に長け、組織の知的基盤を担う。夢を叶える男として、その名を体現し続ける。</p>
+          </div>
+        </div>
+
+        <!-- 大塚教平 -->
+        <div class="member-card fade-in" style="transition-delay:0.3s">
+          <img src="otsuka.jpg" alt="大塚教平" class="member-photo">
+          <div class="member-info">
+            <span class="member-role advisor">大株主兼顧問</span>
+            <h3>大塚 教平</h3>
+            <p>組織の最大の支援者にして精神的支柱。豊富な経験と深い見識でメンバーを導く。その投資眼は台だけにとどまらず、人を見る目も超一流。</p>
           </div>
         </div>
 
