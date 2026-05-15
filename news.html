@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ニュース | 株式会社パチンカス</title>
+  <link rel="stylesheet" href="common.css">
+  <style>
+    .news-container { max-width: 800px; margin: 0 auto; }
+    .news-card { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); margin-bottom: 1.5rem; overflow: hidden; transition: transform var(--transition); }
+    .news-card:hover { transform: translateY(-4px); }
+    .news-card-inner { padding: 2rem; }
+    .news-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
+    .news-date { font-size: 0.85rem; color: var(--gray); font-family: 'Inter', sans-serif; }
+    .news-tag { font-size: 0.72rem; font-weight: 700; padding: 0.25rem 0.8rem; border-radius: 50px; white-space: nowrap; }
+    .tag-press { background: #dbeafe; color: #1d4ed8; }
+    .tag-info  { background: #d1fae5; color: #065f46; }
+    .tag-event { background: #fef3c7; color: #92400e; }
+    .news-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 0.8rem; line-height: 1.6; }
+    .news-card p { font-size: 0.92rem; line-height: 1.9; color: var(--gray); }
+    .news-divider { border: none; border-top: 1px solid #e5e7eb; margin: 0; }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">株式会社<span>パチンカス</span></a>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  <nav id="nav">
+    <ul>
+      <li><a href="about.html">会社概要</a></li>
+      <li><a href="members.html">メンバー</a></li>
+      <li><a href="news.html">ニュース</a></li>
+      <li><a href="recruit.html">採用</a></li>
+      <li><a href="contact.html">お問い合わせ</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <span>News</span>
+  <h1>ニュース</h1>
+</div>
+
+<section>
+  <div class="news-container">
+
+    <div class="news-card fade-in">
+      <div class="news-card-inner">
+        <div class="news-meta">
+          <span class="news-date">2026.05.15</span>
+          <span class="news-tag tag-press">プレスリリース</span>
+        </div>
+        <h3>秘書・坂本奈央が入社。通称「永遠のビギナーズラッカー」が組織に加わる。</h3>
+        <p>2026年5月15日、株式会社パチンカスに秘書として坂本奈央氏が入社しました。生まれながらの強運の持ち主として知られる坂本氏は、代表・浦山公介より直々にスカウトを受け入社を決意。「負けを知らない」という伝説の持ち主が組織に加わることで、さらなる飛躍が期待されます。</p>
+      </div>
+    </div>
+
+    <div class="news-card fade-in" style="transition-delay:0.05s;">
+      <div class="news-card-inner">
+        <div class="news-meta">
+          <span class="news-date">2026.05.14</span>
+          <span class="news-tag tag-event">イベント</span>
+        </div>
+        <h3>GW大波乱——倒産危機からの奇跡の生還。</h3>
+        <p>GW初日より代表・浦山、専務・萩野、取締役・垂井の3名が立て続けに大負けを喫し、組織存続の危機に陥りました。財務状況は一時、倒産寸前まで悪化。しかしGW最終日、専務・萩野による怒涛の捲りが炸裂し、見事に倒産を回避。株式会社パチンカスは今日も生き続けます。「勝つまで投資する」という理念を身をもって体現した歴史的なGWとなりました。</p>
+      </div>
+    </div>
+
+    <div class="news-card fade-in" style="transition-delay:0.1s;">
+      <div class="news-card-inner">
+        <div class="news-meta">
+          <span class="news-date">2026.05.14</span>
+          <span class="news-tag tag-press">プレスリリース</span>
+        </div>
+        <h3>大塚教平氏が大株主兼顧問に就任。さらなる組織強化へ向け、新体制がスタート。</h3>
+        <p>2026年5月14日、大塚教平氏が株式会社パチンカスの大株主兼顧問に就任しました。豊富な人生経験と独自の投資哲学を持つ大塚氏の参画により、組織の精神的支柱が強化されます。代表・浦山は「大塚さんの加入は組織にとって最大の補強。日本一への道が一気に近づいた」とコメントしています。</p>
+      </div>
+    </div>
+
+    <div class="news-card fade-in" style="transition-delay:0.15s;">
+      <div class="news-card-inner">
+        <div class="news-meta">
+          <span class="news-date">2026.04.10</span>
+          <span class="news-tag tag-info">お知らせ</span>
+        </div>
+        <h3>浦山公介が代表取締役に就任。「負けない」精神でチームを率いることを宣言。</h3>
+        <p>2026年4月10日、浦山公介が株式会社パチンカスの代表取締役に正式就任しました。就任にあたり「どんな状況でも諦めない。勝つまで投資し続けることがこの組織の魂だ」と力強く宣言。メンバー一同、代表の言葉に深く感銘を受け、改めて日本一への決意を新たにしました。</p>
+      </div>
+    </div>
+
+    <div class="news-card fade-in" style="transition-delay:0.2s;">
+      <div class="news-card-inner">
+        <div class="news-meta">
+          <span class="news-date">2026.03.20</span>
+          <span class="news-tag tag-event">イベント</span>
+        </div>
+        <h3>第1回「パチンカス選手権2026」開催決定。参加者募集中です。</h3>
+        <p>株式会社パチンカス主催による第1回「パチンカス選手権2026」の開催が決定しました。メンバー間での真剣勝負を通じて、個々のスキルアップと組織の結束を高めることを目的としています。詳細な開催日程・場所については後日発表予定です。奮ってご参加ください。</p>
+      </div>
+    </div>
+
+    <div class="news-card fade-in" style="transition-delay:0.25s;">
+      <div class="news-card-inner">
+        <div class="news-meta">
+          <span class="news-date">2026.01.01</span>
+          <span class="news-tag tag-press">プレスリリース</span>
+        </div>
+        <h3>「勝つまで投資」を掲げた新組織の構想が始動。メンバー3名が結集。</h3>
+        <p>2026年1月1日、新年を機に株式会社パチンカスの設立構想が本格始動しました。「日本一のパチンカス」を目指すというミッションのもと、浦山・萩野・垂井の3名が結集。「給料は払えないけど、お金じゃ買えないものがある」という代表・浦山の言葉のもと、新たな挑戦が幕を開けました。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo">株式会社<span style="color:var(--accent2)">パチンカス</span></div>
+      <p>パチンコをただ楽しむ組織。<br>日本一のパチンカスを目指して。</p>
+    </div>
+    <div class="footer-links">
+      <h4>リンク</h4>
+      <ul>
+        <li><a href="about.html">会社概要</a></li>
+        <li><a href="members.html">メンバー</a></li>
+        <li><a href="news.html">ニュース</a></li>
+        <li><a href="recruit.html">採用</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 株式会社パチンカス. All Rights Reserved.</div>
+</footer>
+
+<button id="scroll-top">↑</button>
+<script src="common.js"></script>
+</body>
+</html>

@@ -4,402 +4,124 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>株式会社パチンカス | 日本一のパチンカス</title>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --primary: #0a2463;
-      --accent: #3e92cc;
-      --accent2: #00c2a8;
-      --light: #f8f9fc;
-      --gray: #6b7280;
-      --dark: #111827;
-      --radius: 12px;
-      --shadow: 0 4px 24px rgba(10,36,99,0.10);
-      --transition: 0.3s cubic-bezier(.4,0,.2,1);
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Noto Sans JP', sans-serif; color: var(--dark); background: #fff; }
-    a { text-decoration: none; color: inherit; }
-    img { max-width: 100%; display: block; }
-
-    header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      background: rgba(255,255,255,0.97);
-      box-shadow: 0 2px 16px rgba(10,36,99,0.08);
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 5vw; height: 68px;
-    }
-    .logo { font-size: 1.15rem; font-weight: 900; color: var(--primary); letter-spacing: 0.02em; }
-    .logo span { color: var(--accent); }
-    nav ul { list-style: none; display: flex; gap: 2rem; }
-    nav ul li a { font-size: 0.9rem; font-weight: 500; color: var(--dark); transition: color var(--transition); }
-    nav ul li a:hover { color: var(--accent); }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-    .hamburger span { width: 26px; height: 2px; background: var(--primary); border-radius: 2px; transition: var(--transition); }
-    @media(max-width:768px){
-      nav { display: none; position: absolute; top: 68px; left: 0; right: 0; background: #fff; padding: 1.5rem 5vw; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
-      nav.open { display: block; }
-      nav ul { flex-direction: column; gap: 1.2rem; }
-      .hamburger { display: flex; }
-    }
-
-    #hero {
-      min-height: 100vh; display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(135deg, var(--primary) 0%, #1a3a7a 50%, #0d3060 100%);
-      color: #fff; text-align: center; padding: 120px 5vw 80px;
-    }
-    .hero-inner { max-width: 800px; }
-    .hero-badge { display: inline-block; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 50px; padding: 0.4rem 1.2rem; font-size: 0.85rem; margin-bottom: 1.5rem; letter-spacing: 0.08em; }
-    .hero-inner h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.2; margin-bottom: 1.2rem; }
-    .hero-inner h1 span { color: var(--accent2); }
-    .hero-inner p { font-size: 1.1rem; opacity: 0.85; margin-bottom: 2.5rem; line-height: 1.8; }
-    .hero-stats { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
-    .hero-stat { text-align: center; }
-    .hero-stat .num { font-size: 2.2rem; font-weight: 900; color: var(--accent2); font-family: 'Inter', sans-serif; }
-    .hero-stat .label { font-size: 0.8rem; opacity: 0.75; margin-top: 0.2rem; }
-    .hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .btn { padding: 0.85rem 2rem; border-radius: 50px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: var(--transition); border: 2px solid transparent; }
-    .btn-primary { background: var(--accent2); color: #fff; }
-    .btn-primary:hover { background: #00a890; transform: translateY(-2px); }
-    .btn-outline { background: transparent; color: #fff; border-color: rgba(255,255,255,0.6); }
-    .btn-outline:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
-
-    section { padding: 100px 5vw; }
-    section:nth-child(even) { background: var(--light); }
-    .section-header { text-align: center; margin-bottom: 60px; }
-    .section-label { display: inline-block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem; }
-    .section-header h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 900; color: var(--primary); }
-
-    .mvv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 2rem; max-width: 960px; margin: 0 auto; }
-    .mvv-card { background: #fff; border-radius: var(--radius); padding: 2.5rem 2rem; box-shadow: var(--shadow); text-align: center; border-top: 4px solid var(--accent); transition: transform var(--transition); }
-    .mvv-card:hover { transform: translateY(-6px); }
-    .mvv-card:nth-child(2) { border-top-color: var(--accent2); }
-    .mvv-card:nth-child(3) { border-top-color: #f59e0b; }
-    .mvv-icon { font-size: 2.4rem; margin-bottom: 1rem; }
-    .mvv-label { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); margin-bottom: 0.6rem; }
-    .mvv-card h3 { font-size: 1.3rem; font-weight: 900; color: var(--primary); }
-
-    .about-inner { max-width: 760px; margin: 0 auto; text-align: center; }
-    .about-badge { display: inline-block; background: var(--primary); color: #fff; border-radius: 50px; padding: 0.4rem 1.4rem; font-size: 0.85rem; font-weight: 700; margin-bottom: 1.8rem; }
-    .about-inner p { font-size: 1.05rem; line-height: 2; color: var(--gray); }
-
-    .members-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; max-width: 1100px; margin: 0 auto; }
-    .member-card { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: transform var(--transition); }
-    .member-card:hover { transform: translateY(-6px); }
-    .member-photo { width: 100%; height: 240px; object-fit: cover; object-position: top; }
-    .member-info { padding: 1.5rem; }
-    .member-role { display: inline-block; background: var(--light); color: var(--accent); font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 50px; margin-bottom: 0.6rem; }
-    .member-info h3 { font-size: 1.1rem; font-weight: 900; color: var(--primary); margin-bottom: 0.5rem; }
-    .member-info p { font-size: 0.85rem; color: var(--gray); line-height: 1.7; }
-
-    .process-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; max-width: 1100px; margin: 0 auto; }
-    .process-step { background: #fff; border-radius: var(--radius); padding: 2rem 1.5rem; box-shadow: var(--shadow); text-align: center; }
-    .process-num { font-size: 2.5rem; font-weight: 900; color: var(--accent); font-family: 'Inter', sans-serif; opacity: 0.3; line-height: 1; margin-bottom: 0.8rem; }
-    .process-step h3 { font-size: 1rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; }
-    .process-step p { font-size: 0.82rem; color: var(--gray); line-height: 1.6; }
-
-    .news-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
-    .news-item { display: flex; align-items: flex-start; gap: 1.2rem; padding: 1.3rem 1.5rem; background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); transition: transform var(--transition); }
-    .news-item:hover { transform: translateX(4px); }
-    .news-date { font-size: 0.82rem; color: var(--gray); min-width: 90px; font-family: 'Inter', sans-serif; padding-top: 3px; }
-    .news-tag { font-size: 0.72rem; font-weight: 700; padding: 0.2rem 0.7rem; border-radius: 50px; white-space: nowrap; }
-    .tag-press { background: #dbeafe; color: #1d4ed8; }
-    .tag-info  { background: #d1fae5; color: #065f46; }
-    .tag-event { background: #fef3c7; color: #92400e; }
-    .news-title { font-size: 0.95rem; font-weight: 500; }
-
-    .recruit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.8rem; max-width: 1000px; margin: 0 auto; }
-    .recruit-card { background: #fff; border-radius: var(--radius); padding: 2rem; box-shadow: var(--shadow); border-left: 4px solid var(--accent); transition: transform var(--transition); }
-    .recruit-card:hover { transform: translateY(-4px); }
-    .recruit-card h3 { font-size: 1rem; font-weight: 700; color: var(--primary); margin-bottom: 0.6rem; }
-    .recruit-card p { font-size: 0.85rem; color: var(--gray); line-height: 1.7; }
-
-    .contact-form { max-width: 640px; margin: 0 auto; background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 3rem 2.5rem; }
-    .form-group { margin-bottom: 1.4rem; }
-    .form-group label { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--primary); }
-    .form-group input, .form-group select, .form-group textarea {
-      width: 100%; padding: 0.8rem 1rem; border: 1.5px solid #e5e7eb; border-radius: 8px;
-      font-size: 0.95rem; font-family: inherit; transition: border-color var(--transition);
-    }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-      outline: none; border-color: var(--accent);
-    }
-    .form-group textarea { min-height: 130px; resize: vertical; }
-    .btn-submit { width: 100%; background: var(--primary); color: #fff; border: none; padding: 1rem; border-radius: 50px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: var(--transition); }
-    .btn-submit:hover { background: var(--accent); transform: translateY(-2px); }
-
-    footer { background: var(--primary); color: rgba(255,255,255,0.75); padding: 60px 5vw 30px; }
-    .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 2rem; margin-bottom: 2.5rem; }
-    .footer-brand .logo { color: #fff; font-size: 1.1rem; margin-bottom: 0.8rem; }
-    .footer-brand p { font-size: 0.85rem; line-height: 1.8; }
-    .footer-links h4 { color: #fff; font-size: 0.9rem; margin-bottom: 0.8rem; }
-    .footer-links ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
-    .footer-links ul li a { font-size: 0.85rem; transition: color var(--transition); }
-    .footer-links ul li a:hover { color: var(--accent2); }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 1.2rem; text-align: center; font-size: 0.8rem; }
-
-    #scroll-top { position: fixed; bottom: 2rem; right: 2rem; background: var(--accent); color: #fff; border: none; border-radius: 50%; width: 48px; height: 48px; font-size: 1.3rem; cursor: pointer; display: none; align-items: center; justify-content: center; box-shadow: 0 4px 16px rgba(62,146,204,0.35); z-index: 999; transition: var(--transition); }
-    #scroll-top.show { display: flex; }
-    #scroll-top:hover { background: var(--primary); }
-
-    .fade-in { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .fade-in.visible { opacity: 1; transform: none; }
-  </style>
+  <link rel="stylesheet" href="common.css">
 </head>
 <body>
 
 <header>
-  <div class="logo">株式会社<span>パチンカス</span></div>
-  <div class="hamburger" id="hamburger">
-    <span></span><span></span><span></span>
-  </div>
+  <a href="index.html" class="logo">株式会社<span>パチンカス</span></a>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
   <nav id="nav">
     <ul>
-      <li><a href="#mvv">理念</a></li>
-      <li><a href="#about">会社概要</a></li>
-      <li><a href="#members">メンバー</a></li>
-      <li><a href="#news">ニュース</a></li>
-      <li><a href="#recruit">採用</a></li>
-      <li><a href="#contact">お問い合わせ</a></li>
+      <li><a href="about.html">会社概要</a></li>
+      <li><a href="members.html">メンバー</a></li>
+      <li><a href="news.html">ニュース</a></li>
+      <li><a href="recruit.html">採用</a></li>
+      <li><a href="contact.html">お問い合わせ</a></li>
     </ul>
   </nav>
 </header>
 
-<section id="hero">
-  <div class="hero-inner">
-    <div class="hero-badge">🎰 PACHINKAS Co., Ltd.</div>
-    <h1>日本一の<br><span>パチンカス</span>を目指して</h1>
-    <p>パチンコをただ楽しむ組織として、<br>勝つまで投資し続ける精神で歩み続けます。</p>
-    <div class="hero-stats">
-      <div class="hero-stat"><div class="num">5</div><div class="label">メンバー数</div></div>
-      <div class="hero-stat"><div class="num">0%</div><div class="label">諦め率</div></div>
-      <div class="hero-stat"><div class="num">∞</div><div class="label">投資精神</div></div>
-      <div class="hero-stat"><div class="num">1位</div><div class="label">目標順位</div></div>
+<section id="hero" style="
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--primary) 0%, #1a3a7a 50%, #0d3060 100%);
+  color: #fff; text-align: center; padding: 120px 5vw 80px;">
+  <div style="max-width:800px;">
+    <div style="display:inline-block; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25); border-radius:50px; padding:0.4rem 1.2rem; font-size:0.85rem; margin-bottom:1.5rem; letter-spacing:0.08em;">🎰 PACHINKAS Co., Ltd.</div>
+    <h1 style="font-size:clamp(2rem,5vw,3.5rem); font-weight:900; line-height:1.2; margin-bottom:1.2rem;">日本一の<br><span style="color:var(--accent2)">パチンカス</span>を目指して</h1>
+    <p style="font-size:1.1rem; opacity:0.85; margin-bottom:2.5rem; line-height:1.8;">パチンコをただ楽しむ組織として、<br>勝つまで投資し続ける精神で歩み続けます。</p>
+    <div style="display:flex; justify-content:center; gap:3rem; flex-wrap:wrap; margin-bottom:2.5rem;">
+      <div style="text-align:center;"><div style="font-size:2.2rem; font-weight:900; color:var(--accent2); font-family:'Inter',sans-serif;">5</div><div style="font-size:0.8rem; opacity:0.75; margin-top:0.2rem;">メンバー数</div></div>
+      <div style="text-align:center;"><div style="font-size:2.2rem; font-weight:900; color:var(--accent2); font-family:'Inter',sans-serif;">0%</div><div style="font-size:0.8rem; opacity:0.75; margin-top:0.2rem;">諦め率</div></div>
+      <div style="text-align:center;"><div style="font-size:2.2rem; font-weight:900; color:var(--accent2); font-family:'Inter',sans-serif;">∞</div><div style="font-size:0.8rem; opacity:0.75; margin-top:0.2rem;">投資精神</div></div>
+      <div style="text-align:center;"><div style="font-size:2.2rem; font-weight:900; color:var(--accent2); font-family:'Inter',sans-serif;">1位</div><div style="font-size:0.8rem; opacity:0.75; margin-top:0.2rem;">目標順位</div></div>
     </div>
-    <div class="hero-btns">
-      <a href="#members" class="btn btn-primary">メンバーを見る</a>
-      <a href="#contact" class="btn btn-outline">お問い合わせ</a>
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <a href="members.html" class="btn btn-primary">メンバーを見る</a>
+      <a href="contact.html" class="btn btn-outline" style="color:#fff; border-color:rgba(255,255,255,0.6);">お問い合わせ</a>
     </div>
   </div>
 </section>
 
-<section id="mvv">
+<!-- MVV -->
+<section>
   <div class="section-header fade-in">
     <span class="section-label">Mission / Vision / Value</span>
     <h2>私たちの理念</h2>
   </div>
-  <div class="mvv-grid">
-    <div class="mvv-card fade-in">
-      <div class="mvv-icon">🏆</div>
-      <div class="mvv-label">Mission</div>
-      <h3>日本一のパチンカス</h3>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:2rem; max-width:960px; margin:0 auto;">
+    <div class="fade-in" style="background:#fff; border-radius:var(--radius); padding:2.5rem 2rem; box-shadow:var(--shadow); text-align:center; border-top:4px solid var(--accent);">
+      <div style="font-size:2.4rem; margin-bottom:1rem;">🏆</div>
+      <div style="font-size:0.78rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--gray); margin-bottom:0.6rem;">Mission</div>
+      <h3 style="font-size:1.3rem; font-weight:900; color:var(--primary);">日本一のパチンカス</h3>
     </div>
-    <div class="mvv-card fade-in" style="transition-delay:0.1s">
-      <div class="mvv-icon">💪</div>
-      <div class="mvv-label">Vision</div>
-      <h3>負けない</h3>
+    <div class="fade-in" style="background:#fff; border-radius:var(--radius); padding:2.5rem 2rem; box-shadow:var(--shadow); text-align:center; border-top:4px solid var(--accent2); transition-delay:0.1s;">
+      <div style="font-size:2.4rem; margin-bottom:1rem;">💪</div>
+      <div style="font-size:0.78rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--gray); margin-bottom:0.6rem;">Vision</div>
+      <h3 style="font-size:1.3rem; font-weight:900; color:var(--primary);">負けない</h3>
     </div>
-    <div class="mvv-card fade-in" style="transition-delay:0.2s">
-      <div class="mvv-icon">💰</div>
-      <div class="mvv-label">Value</div>
-      <h3>勝つまで投資</h3>
+    <div class="fade-in" style="background:#fff; border-radius:var(--radius); padding:2.5rem 2rem; box-shadow:var(--shadow); text-align:center; border-top:4px solid #f59e0b; transition-delay:0.2s;">
+      <div style="font-size:2.4rem; margin-bottom:1rem;">💰</div>
+      <div style="font-size:0.78rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--gray); margin-bottom:0.6rem;">Value</div>
+      <h3 style="font-size:1.3rem; font-weight:900; color:var(--primary);">勝つまで投資</h3>
     </div>
   </div>
 </section>
 
-<section id="about">
+<!-- NEWS PICKUP -->
+<section>
   <div class="section-header fade-in">
-    <span class="section-label">About Us</span>
-    <h2>会社概要</h2>
+    <span class="section-label">News</span>
+    <h2>最新のお知らせ</h2>
   </div>
-  <div class="about-inner fade-in">
-    <div class="about-badge">2024年設立</div>
-    <p>株式会社パチンカスは「パチンコをただ楽しむ組織」として設立されました。勝ち負けを超えた先にある純粋な楽しさを追求し、日本一のパチンカス集団となることを目指しています。私たちは諦めません。勝つまで投資し続ける精神こそが、私たちの最大の強みです。</p>
+  <div style="max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:1rem;">
+    <div class="fade-in" style="display:flex; align-items:flex-start; gap:1.2rem; padding:1.3rem 1.5rem; background:#fff; border-radius:var(--radius); box-shadow:var(--shadow);">
+      <span style="font-size:0.82rem; color:var(--gray); min-width:90px; font-family:'Inter',sans-serif; padding-top:3px;">2026.05.15</span>
+      <span style="font-size:0.72rem; font-weight:700; padding:0.2rem 0.7rem; border-radius:50px; background:#dbeafe; color:#1d4ed8; white-space:nowrap;">プレスリリース</span>
+      <span style="font-size:0.95rem; font-weight:500;">秘書・坂本奈央が入社。通称「永遠のビギナーズラッカー」が組織に加わる。</span>
+    </div>
+    <div class="fade-in" style="display:flex; align-items:flex-start; gap:1.2rem; padding:1.3rem 1.5rem; background:#fff; border-radius:var(--radius); box-shadow:var(--shadow); transition-delay:0.05s;">
+      <span style="font-size:0.82rem; color:var(--gray); min-width:90px; font-family:'Inter',sans-serif; padding-top:3px;">2026.05.14</span>
+      <span style="font-size:0.72rem; font-weight:700; padding:0.2rem 0.7rem; border-radius:50px; background:#fef3c7; color:#92400e; white-space:nowrap;">イベント</span>
+      <span style="font-size:0.95rem; font-weight:500;">GW大波乱——倒産危機からの奇跡の生還。専務・萩野の怒涛の捲りで倒産を回避。</span>
+    </div>
+  </div>
+  <div style="text-align:center; margin-top:2.5rem;">
+    <a href="news.html" class="btn btn-outline">ニュース一覧を見る</a>
   </div>
 </section>
 
-<section id="members">
+<!-- MEMBERS PICKUP -->
+<section>
   <div class="section-header fade-in">
     <span class="section-label">Members</span>
     <h2>メンバー紹介</h2>
   </div>
-  <div class="members-grid">
-    <div class="member-card fade-in">
-      <img src="urayama.jpg" alt="浦山公介" class="member-photo">
-      <div class="member-info">
-        <span class="member-role">代表取締役</span>
-        <h3>浦山 公介</h3>
-        <p>日本一のパチンカスを目指して組織を牽引。圧倒的なリーダーシップと台選びのセンスで全メンバーをまとめる。</p>
-      </div>
+  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1.5rem; max-width:1100px; margin:0 auto;">
+    <div class="fade-in" style="background:#fff; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); text-align:center; padding-bottom:1rem;">
+      <img src="urayama.jpg" alt="浦山公介" style="width:100%; height:200px; object-fit:cover; object-position:top;">
+      <div style="padding:0.8rem;"><div style="font-size:0.75rem; color:var(--accent); font-weight:700;">代表取締役</div><div style="font-weight:900; color:var(--primary);">浦山 公介</div></div>
     </div>
-    <div class="member-card fade-in" style="transition-delay:0.1s">
-      <img src="hagino.jpg" alt="萩野航太朗" class="member-photo">
-      <div class="member-info">
-        <span class="member-role">専務取締役</span>
-        <h3>萩野 航太朗</h3>
-        <p>データ分析と戦略立案を担当。出玉率の研究に余念がなく、組織の投資戦略を支える参謀役。</p>
-      </div>
+    <div class="fade-in" style="background:#fff; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); text-align:center; padding-bottom:1rem; transition-delay:0.1s;">
+      <img src="hagino.jpg" alt="萩野航太朗" style="width:100%; height:200px; object-fit:cover; object-position:top;">
+      <div style="padding:0.8rem;"><div style="font-size:0.75rem; color:var(--accent); font-weight:700;">専務取締役</div><div style="font-weight:900; color:var(--primary);">萩野 航太朗</div></div>
     </div>
-    <div class="member-card fade-in" style="transition-delay:0.2s">
-      <img src="tarui.jpg" alt="垂井吾叶夢" class="member-photo">
-      <div class="member-info">
-        <span class="member-role">取締役</span>
-        <h3>垂井 吾叶夢</h3>
-        <p>フィールドワークの第一人者。全国の優良ホールを巡り、現場からの知見を組織にフィードバックする。</p>
-      </div>
+    <div class="fade-in" style="background:#fff; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); text-align:center; padding-bottom:1rem; transition-delay:0.2s;">
+      <img src="tarui.jpg" alt="垂井吾叶夢" style="width:100%; height:200px; object-fit:cover; object-position:top;">
+      <div style="padding:0.8rem;"><div style="font-size:0.75rem; color:var(--accent); font-weight:700;">取締役</div><div style="font-weight:900; color:var(--primary);">垂井 吾叶夢</div></div>
     </div>
-    <div class="member-card fade-in" style="transition-delay:0.3s">
-      <img src="otsuka.jpg" alt="大塚教平" class="member-photo">
-      <div class="member-info">
-        <span class="member-role">大株主兼顧問</span>
-        <h3>大塚 教平</h3>
-        <p>組織の最大の支援者にして精神的支柱。豊富な経験と深い見識でメンバーを導く。その投資眼は台だけにとどまらず、人を見る目も超一流。</p>
-      </div>
+    <div class="fade-in" style="background:#fff; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); text-align:center; padding-bottom:1rem; transition-delay:0.3s;">
+      <img src="otsuka.jpg" alt="大塚教平" style="width:100%; height:200px; object-fit:cover; object-position:top;">
+      <div style="padding:0.8rem;"><div style="font-size:0.75rem; color:var(--accent); font-weight:700;">大株主兼顧問</div><div style="font-weight:900; color:var(--primary);">大塚 教平</div></div>
     </div>
-    <div class="member-card fade-in" style="transition-delay:0.4s">
-      <img src="sakamoto.jpg" alt="坂本奈央" class="member-photo">
-      <div class="member-info">
-        <span class="member-role">秘書</span>
-        <h3>坂本 奈央</h3>
-        <p>負けを知らないラッキーガール。その圧倒的な強運で組織に幸運をもたらす。通称「永遠のビギナーズラッカー」。</p>
-      </div>
+    <div class="fade-in" style="background:#fff; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); text-align:center; padding-bottom:1rem; transition-delay:0.4s;">
+      <img src="sakamoto.jpg" alt="坂本奈央" style="width:100%; height:200px; object-fit:cover; object-position:top;">
+      <div style="padding:0.8rem;"><div style="font-size:0.75rem; color:var(--accent); font-weight:700;">秘書</div><div style="font-weight:900; color:var(--primary);">坂本 奈央</div></div>
     </div>
   </div>
-</section>
-
-<section id="process">
-  <div class="section-header fade-in">
-    <span class="section-label">Process</span>
-    <h2>パチンコの流儀</h2>
-  </div>
-  <div class="process-steps">
-    <div class="process-step fade-in">
-      <div class="process-num">01</div>
-      <h3>情報収集</h3>
-      <p>釘・スペック・設定をリサーチし、最良の一台を絞り込む。</p>
-    </div>
-    <div class="process-step fade-in" style="transition-delay:0.1s">
-      <div class="process-num">02</div>
-      <h3>台選定</h3>
-      <p>データと直感を融合させ、勝てる台を厳選する。</p>
-    </div>
-    <div class="process-step fade-in" style="transition-delay:0.15s">
-      <div class="process-num">03</div>
-      <h3>着席・投資</h3>
-      <p>勝つまで投資を続ける。諦めは敗北への近道である。</p>
-    </div>
-    <div class="process-step fade-in" style="transition-delay:0.2s">
-      <div class="process-num">04</div>
-      <h3>振り返り</h3>
-      <p>結果を記録・分析し、次回の戦略へと活かす。</p>
-    </div>
-    <div class="process-step fade-in" style="transition-delay:0.25s">
-      <div class="process-num">05</div>
-      <h3>知識共有</h3>
-      <p>メンバー間で知見を共有し、組織全体のレベルを高める。</p>
-    </div>
-  </div>
-</section>
-
-<section id="news">
-  <div class="section-header fade-in">
-    <span class="section-label">News</span>
-    <h2>お知らせ</h2>
-  </div>
-  <div class="news-list">
-    <div class="news-item fade-in">
-      <span class="news-date">2026.05.14</span>
-      <span class="news-tag tag-press">プレスリリース</span>
-      <span class="news-title">秘書・坂本奈央が入社。通称「永遠のビギナーズラッカー」、負けを知らないラッキーガールが組織に加わる。</span>
-    </div>
-    <div class="news-item fade-in" style="transition-delay:0.04s">
-      <span class="news-date">2026.05.14</span>
-      <span class="news-tag tag-event">イベント</span>
-      <span class="news-title">GW大波乱——倒産危機からの奇跡の生還。GW初日より3名が大負けを喫するも、最終日に専務・萩野の怒涛の捲りで倒産を回避。</span>
-    </div>
-    <div class="news-item fade-in" style="transition-delay:0.08s">
-      <span class="news-date">2026.05.14</span>
-      <span class="news-tag tag-press">プレスリリース</span>
-      <span class="news-title">大塚教平氏が大株主兼顧問に就任。さらなる組織強化へ向け、新体制がスタート。</span>
-    </div>
-    <div class="news-item fade-in" style="transition-delay:0.12s">
-      <span class="news-date">2026.04.10</span>
-      <span class="news-tag tag-info">お知らせ</span>
-      <span class="news-title">浦山公介が代表取締役に就任。「負けない」精神でチームを率いることを宣言。</span>
-    </div>
-    <div class="news-item fade-in" style="transition-delay:0.16s">
-      <span class="news-date">2026.03.20</span>
-      <span class="news-tag tag-event">イベント</span>
-      <span class="news-title">第1回「パチンカス選手権2026」開催決定。参加者募集中です。</span>
-    </div>
-    <div class="news-item fade-in" style="transition-delay:0.20s">
-      <span class="news-date">2026.01.01</span>
-      <span class="news-tag tag-press">プレスリリース</span>
-      <span class="news-title">「勝つまで投資」を掲げた新組織の構想が始動。メンバー3名が結集。</span>
-    </div>
-  </div>
-</section>
-
-<section id="recruit">
-  <div class="section-header fade-in">
-    <span class="section-label">Recruit</span>
-    <h2>採用情報</h2>
-  </div>
-  <div class="recruit-grid">
-    <div class="recruit-card fade-in">
-      <h3>🎯 パチンコ戦略アナリスト</h3>
-      <p>データに基づいて勝率を最大化する戦略を立案。数字に強く、負けず嫌いな方を歓迎。</p>
-    </div>
-    <div class="recruit-card fade-in" style="transition-delay:0.1s">
-      <h3>🔍 フィールドリサーチャー</h3>
-      <p>全国のホールを実際に巡り、現場情報を収集・レポートする。行動力と体力に自信がある方。</p>
-    </div>
-    <div class="recruit-card fade-in" style="transition-delay:0.2s">
-      <h3>✍️ パチンココンテンツクリエイター</h3>
-      <p>パチンコの魅力を発信するコンテンツを制作。台の魅力を言葉と映像で伝えられる方。</p>
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <div class="section-header fade-in">
-    <span class="section-label">Contact</span>
-    <h2>お問い合わせ</h2>
-  </div>
-  <div class="contact-form fade-in">
-    <form id="contactForm">
-      <div class="form-group">
-        <label>会社名・団体名</label>
-        <input type="text" placeholder="例：株式会社〇〇">
-      </div>
-      <div class="form-group">
-        <label>お名前 <span style="color:red">*</span></label>
-        <input type="text" placeholder="例：山田 太郎" required>
-      </div>
-      <div class="form-group">
-        <label>メールアドレス <span style="color:red">*</span></label>
-        <input type="email" placeholder="example@email.com" required>
-      </div>
-      <div class="form-group">
-        <label>電話番号</label>
-        <input type="tel" placeholder="090-0000-0000">
-      </div>
-      <div class="form-group">
-        <label>お問い合わせ種別</label>
-        <select>
-          <option>入会について</option>
-          <option>採用について</option>
-          <option>取材・メディア</option>
-          <option>その他</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>お問い合わせ内容 <span style="color:red">*</span></label>
-        <textarea placeholder="お気軽にご記入ください" required></textarea>
-      </div>
-      <button type="submit" class="btn-submit">送信する</button>
-    </form>
+  <div style="text-align:center; margin-top:2.5rem;">
+    <a href="members.html" class="btn btn-outline">メンバー詳細を見る</a>
   </div>
 </section>
 
@@ -412,42 +134,18 @@
     <div class="footer-links">
       <h4>リンク</h4>
       <ul>
-        <li><a href="#mvv">理念</a></li>
-        <li><a href="#about">会社概要</a></li>
-        <li><a href="#members">メンバー</a></li>
-        <li><a href="#news">ニュース</a></li>
-        <li><a href="#recruit">採用</a></li>
-        <li><a href="#contact">お問い合わせ</a></li>
+        <li><a href="about.html">会社概要</a></li>
+        <li><a href="members.html">メンバー</a></li>
+        <li><a href="news.html">ニュース</a></li>
+        <li><a href="recruit.html">採用</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
       </ul>
     </div>
   </div>
-  <div class="footer-bottom">
-    <p>© 2026 株式会社パチンカス. All Rights Reserved.</p>
-  </div>
+  <div class="footer-bottom">© 2026 株式会社パチンカス. All Rights Reserved.</div>
 </footer>
 
 <button id="scroll-top">↑</button>
-
-<script>
-  const hamburger = document.getElementById('hamburger');
-  const nav = document.getElementById('nav');
-  hamburger.addEventListener('click', () => nav.classList.toggle('open'));
-  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
-
-  const scrollBtn = document.getElementById('scroll-top');
-  window.addEventListener('scroll', () => scrollBtn.classList.toggle('show', window.scrollY > 400));
-  scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-  document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert('お問い合わせを受け付けました。ありがとうございます！');
-    this.reset();
-  });
-</script>
+<script src="common.js"></script>
 </body>
 </html>

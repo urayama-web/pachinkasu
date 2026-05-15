@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>会社概要 | 株式会社パチンカス</title>
+  <link rel="stylesheet" href="common.css">
+  <style>
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1000px; margin: 0 auto; align-items: center; }
+    @media(max-width:768px){ .about-grid { grid-template-columns: 1fr; gap: 2rem; } }
+    .about-table { width: 100%; border-collapse: collapse; }
+    .about-table tr { border-bottom: 1px solid #e5e7eb; }
+    .about-table th { padding: 1rem; text-align: left; font-size: 0.85rem; font-weight: 700; color: var(--primary); background: var(--light); width: 35%; }
+    .about-table td { padding: 1rem; font-size: 0.95rem; color: var(--dark); }
+    .president-card { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: 280px 1fr; }
+    @media(max-width:768px){ .president-card { grid-template-columns: 1fr; } }
+    .president-card img { width: 100%; height: 100%; object-fit: cover; object-position: top; min-height: 320px; }
+    .president-text { padding: 2.5rem; }
+    .president-text h3 { font-size: 1.4rem; font-weight: 900; color: var(--primary); margin-bottom: 0.3rem; }
+    .president-text .role { font-size: 0.85rem; color: var(--accent); font-weight: 700; margin-bottom: 1.5rem; }
+    .president-text p { font-size: 0.95rem; line-height: 2; color: var(--gray); margin-bottom: 1rem; }
+    .message-box { background: var(--primary); color: #fff; border-radius: var(--radius); padding: 2rem 2.5rem; margin-top: 1.5rem; }
+    .message-box p { font-size: 1rem; line-height: 1.9; }
+    .message-box .quote { font-size: 1.1rem; font-weight: 700; color: var(--accent2); margin-top: 1rem; line-height: 1.7; }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">株式会社<span>パチンカス</span></a>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  <nav id="nav">
+    <ul>
+      <li><a href="about.html">会社概要</a></li>
+      <li><a href="members.html">メンバー</a></li>
+      <li><a href="news.html">ニュース</a></li>
+      <li><a href="recruit.html">採用</a></li>
+      <li><a href="contact.html">お問い合わせ</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <span>About Us</span>
+  <h1>会社概要</h1>
+</div>
+
+<!-- 会社情報テーブル -->
+<section>
+  <div class="section-header fade-in">
+    <span class="section-label">Company Info</span>
+    <h2>会社情報</h2>
+  </div>
+  <div style="max-width:800px; margin:0 auto;" class="fade-in">
+    <table class="about-table">
+      <tr><th>会社名</th><td>株式会社パチンカス</td></tr>
+      <tr><th>代表取締役</th><td>浦山 公介</td></tr>
+      <tr><th>設立</th><td>2024年</td></tr>
+      <tr><th>事業内容</th><td>パチンコをただ楽しむ組織としての活動全般</td></tr>
+      <tr><th>ミッション</th><td>日本一のパチンカス</td></tr>
+      <tr><th>ビジョン</th><td>負けない</td></tr>
+      <tr><th>バリュー</th><td>勝つまで投資</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- 代表取締役 -->
+<section>
+  <div class="section-header fade-in">
+    <span class="section-label">President</span>
+    <h2>代表取締役</h2>
+  </div>
+  <div class="president-card fade-in">
+    <img src="urayama.jpg" alt="浦山公介">
+    <div class="president-text">
+      <h3>浦山 公介</h3>
+      <div class="role">代表取締役</div>
+      <p>日本一のパチンカスを目指し、株式会社パチンカスを設立。「負けない」という強い信念のもと、メンバーを牽引し続ける。台選びの直感と圧倒的なリーダーシップで組織を率いる。</p>
+      <p>「勝つまで投資する」という精神を体現し、どんな状況でも諦めない姿勢がメンバーから絶大な信頼を得ている。</p>
+    </div>
+  </div>
+</section>
+
+<!-- 社長の想い -->
+<section>
+  <div class="section-header fade-in">
+    <span class="section-label">Message</span>
+    <h2>社長の想い</h2>
+  </div>
+  <div style="max-width:800px; margin:0 auto;" class="fade-in">
+    <div class="message-box">
+      <p>パチンコは単なるギャンブルではない。台を読む力、状況を判断する力、そして何より「諦めない心」を鍛える最高の道場だと私は思っています。</p>
+      <p style="margin-top:1rem;">この組織は、そんなパチンコをただ純粋に楽しみながら、日本一を目指す仲間の集まりです。勝ち負けより大切なのは、最後まで投資し続ける精神。それが私たちの文化です。</p>
+      <div class="quote">「給料は払えないけど、お金じゃ買えないものが当社にはある。」</div>
+    </div>
+  </div>
+</section>
+
+<!-- 新卒へのメッセージ -->
+<section>
+  <div class="section-header fade-in">
+    <span class="section-label">For Students</span>
+    <h2>新卒の学生へ</h2>
+  </div>
+  <div style="max-width:760px; margin:0 auto; text-align:center;" class="fade-in">
+    <p style="font-size:1.05rem; line-height:2; color:var(--gray); margin-bottom:2rem;">給料は払えません。でも、ここにはお金では絶対に買えないものがあります。仲間、経験、そして「負けない心」。それを一緒に育てていきましょう。</p>
+    <a href="recruit.html" class="btn btn-primary">採用情報を見る</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo">株式会社<span style="color:var(--accent2)">パチンカス</span></div>
+      <p>パチンコをただ楽しむ組織。<br>日本一のパチンカスを目指して。</p>
+    </div>
+    <div class="footer-links">
+      <h4>リンク</h4>
+      <ul>
+        <li><a href="about.html">会社概要</a></li>
+        <li><a href="members.html">メンバー</a></li>
+        <li><a href="news.html">ニュース</a></li>
+        <li><a href="recruit.html">採用</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 株式会社パチンカス. All Rights Reserved.</div>
+</footer>
+
+<button id="scroll-top">↑</button>
+<script src="common.js"></script>
+</body>
+</html>

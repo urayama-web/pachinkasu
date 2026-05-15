@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>お問い合わせ | 株式会社パチンカス</title>
+  <link rel="stylesheet" href="common.css">
+  <style>
+    .contact-wrapper { max-width: 760px; margin: 0 auto; }
+    .contact-intro { text-align: center; margin-bottom: 3rem; }
+    .contact-intro p { font-size: 1rem; line-height: 2; color: var(--gray); }
+    .contact-form { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 3rem 2.5rem; }
+    .form-group { margin-bottom: 1.6rem; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--primary); }
+    .form-group label span { color: #ef4444; margin-left: 0.3rem; }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 0.85rem 1rem; border: 1.5px solid #e5e7eb; border-radius: 8px;
+      font-size: 0.95rem; font-family: inherit; transition: border-color var(--transition);
+      background: #fff;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(62,146,204,0.1);
+    }
+    .form-group textarea { min-height: 150px; resize: vertical; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    @media(max-width:600px){ .form-row { grid-template-columns: 1fr; } }
+    .btn-submit { width: 100%; background: var(--primary); color: #fff; border: none; padding: 1.1rem; border-radius: 50px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: var(--transition); margin-top: 0.5rem; }
+    .btn-submit:hover { background: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(10,36,99,0.2); }
+    .contact-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; max-width: 760px; margin: 0 auto; }
+    .info-card { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 1.8rem; text-align: center; }
+    .info-icon { font-size: 2rem; margin-bottom: 0.8rem; }
+    .info-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--primary); margin-bottom: 0.5rem; }
+    .info-card p { font-size: 0.85rem; color: var(--gray); line-height: 1.7; }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">株式会社<span>パチンカス</span></a>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  <nav id="nav">
+    <ul>
+      <li><a href="about.html">会社概要</a></li>
+      <li><a href="members.html">メンバー</a></li>
+      <li><a href="news.html">ニュース</a></li>
+      <li><a href="recruit.html">採用</a></li>
+      <li><a href="contact.html">お問い合わせ</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="page-hero">
+  <span>Contact</span>
+  <h1>お問い合わせ</h1>
+</div>
+
+<!-- 連絡先情報 -->
+<section>
+  <div class="contact-info">
+    <div class="info-card fade-in">
+      <div class="info-icon">📧</div>
+      <h3>メール</h3>
+      <p>info@pachinkas.co.jp<br>24時間受付中</p>
+    </div>
+    <div class="info-card fade-in" style="transition-delay:0.1s;">
+      <div class="info-icon">⏰</div>
+      <h3>返信時間</h3>
+      <p>営業時間内に順次ご返信します。<br>※台に座っている間は返信が遅れる場合があります。</p>
+    </div>
+    <div class="info-card fade-in" style="transition-delay:0.2s;">
+      <div class="info-icon">📍</div>
+      <h3>所在地</h3>
+      <p>全国各地のホール<br>（本社：移動中）</p>
+    </div>
+  </div>
+</section>
+
+<!-- お問い合わせフォーム -->
+<section>
+  <div class="contact-wrapper">
+    <div class="contact-intro fade-in">
+      <p>入会・採用・取材など、お気軽にお問い合わせください。<br>「勝つまで投資」の精神でお返事いたします。</p>
+    </div>
+    <div class="contact-form fade-in">
+      <form id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>お名前<span>*</span></label>
+            <input type="text" placeholder="例：山田 太郎" required>
+          </div>
+          <div class="form-group">
+            <label>フリガナ</label>
+            <input type="text" placeholder="例：ヤマダ タロウ">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>メールアドレス<span>*</span></label>
+          <input type="email" placeholder="example@email.com" required>
+        </div>
+        <div class="form-group">
+          <label>電話番号</label>
+          <input type="tel" placeholder="090-0000-0000">
+        </div>
+        <div class="form-group">
+          <label>会社名・団体名</label>
+          <input type="text" placeholder="例：株式会社〇〇">
+        </div>
+        <div class="form-group">
+          <label>お問い合わせ種別<span>*</span></label>
+          <select required>
+            <option value="">選択してください</option>
+            <option>入会について</option>
+            <option>採用について</option>
+            <option>取材・メディア</option>
+            <option>イベントについて</option>
+            <option>その他</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>お問い合わせ内容<span>*</span></label>
+          <textarea placeholder="お気軽にご記入ください。パチンコへの熱い想いもお待ちしております。" required></textarea>
+        </div>
+        <button type="submit" class="btn-submit">送信する</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="logo">株式会社<span style="color:var(--accent2)">パチンカス</span></div>
+      <p>パチンコをただ楽しむ組織。<br>日本一のパチンカスを目指して。</p>
+    </div>
+    <div class="footer-links">
+      <h4>リンク</h4>
+      <ul>
+        <li><a href="about.html">会社概要</a></li>
+        <li><a href="members.html">メンバー</a></li>
+        <li><a href="news.html">ニュース</a></li>
+        <li><a href="recruit.html">採用</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 株式会社パチンカス. All Rights Reserved.</div>
+</footer>
+
+<button id="scroll-top">↑</button>
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const nav = document.getElementById('nav');
+  hamburger.addEventListener('click', () => nav.classList.toggle('open'));
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+  const scrollBtn = document.getElementById('scroll-top');
+  window.addEventListener('scroll', () => scrollBtn.classList.toggle('show', window.scrollY > 400));
+  scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('お問い合わせを受け付けました。勝つまで返信いたします！');
+    this.reset();
+  });
+</script>
+</body>
+</html>
