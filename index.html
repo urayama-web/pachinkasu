@@ -5,6 +5,141 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>株式会社パチンカス | 日本一のパチンカス</title>
   <link rel="stylesheet" href="common.css">
+  <style>
+    /* ===== 使命セクション ===== */
+    #mission {
+      background: linear-gradient(135deg, #0a0a1a 0%, #0d1b3e 50%, #0a0a1a 100%);
+      color: #fff;
+      padding: 100px 5vw;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #mission::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(99,102,241,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .mission-label {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      border: 1px solid rgba(251,191,36,0.4);
+      padding: 0.3rem 1.2rem;
+      border-radius: 50px;
+      margin-bottom: 2rem;
+    }
+    .mission-title {
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+    }
+    .mission-title span {
+      color: var(--accent2);
+    }
+    .mission-sub {
+      font-size: 1rem;
+      line-height: 2;
+      color: rgba(255,255,255,0.75);
+      max-width: 620px;
+      margin: 0 auto 3rem;
+    }
+    .mission-divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      margin: 2.5rem auto;
+      border-radius: 2px;
+    }
+
+    /* ===== 玉道セクション ===== */
+    #tamado {
+      background: #0a0a1a;
+      color: #fff;
+      padding: 80px 5vw 100px;
+      text-align: center;
+      position: relative;
+    }
+    .tamado-label {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      border: 1px solid rgba(99,102,241,0.4);
+      padding: 0.3rem 1.2rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+    }
+    .tamado-heading {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 900;
+      margin-bottom: 3rem;
+      letter-spacing: 0.05em;
+    }
+    .tamado-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+      max-width: 960px;
+      margin: 0 auto 3rem;
+    }
+    .tamado-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .tamado-card:hover {
+      background: rgba(99,102,241,0.15);
+      transform: translateY(-6px);
+    }
+    .tamado-num {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--accent2);
+      margin-bottom: 0.6rem;
+      font-family: 'Inter', sans-serif;
+    }
+    .tamado-card h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+    .tamado-card p {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+    }
+    .tamado-quote {
+      max-width: 720px;
+      margin: 0 auto;
+      background: rgba(251,191,36,0.08);
+      border: 1px solid rgba(251,191,36,0.3);
+      border-left: 4px solid var(--accent2);
+      border-radius: 12px;
+      padding: 2rem 2.5rem;
+      text-align: left;
+    }
+    .tamado-quote p {
+      font-size: 0.97rem;
+      line-height: 2;
+      color: rgba(255,255,255,0.85);
+    }
+    .tamado-quote strong {
+      color: var(--accent2);
+    }
+  </style>
 </head>
 <body>
 
@@ -22,6 +157,7 @@
   </nav>
 </header>
 
+<!-- HERO -->
 <section id="hero" style="
   min-height:100vh; display:flex; align-items:center; justify-content:center;
   background-image: url('hero-bg.jpg');
@@ -30,9 +166,7 @@
   background-repeat: no-repeat;
   color:#fff; text-align:center; padding:120px 5vw 80px;
   position: relative;">
-  <div style="
-    position:absolute; inset:0;
-    background:rgba(0,0,0,0.55);"></div>
+  <div style="position:absolute; inset:0; background:rgba(0,0,0,0.55);"></div>
   <div style="position:relative; z-index:1; max-width:800px;">
     <div style="display:inline-block; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25); border-radius:50px; padding:0.4rem 1.2rem; font-size:0.85rem; margin-bottom:1.5rem; letter-spacing:0.08em;">PACHINKAS Co., Ltd.</div>
     <h1 style="font-size:clamp(2rem,5vw,3.5rem); font-weight:900; line-height:1.2; margin-bottom:1.2rem;">日本一の<br><span style="color:var(--accent2)">パチンカス</span>を目指して</h1>
@@ -50,28 +184,57 @@
   </div>
 </section>
 
-<!-- MVV -->
-<section>
-  <div class="section-header fade-in">
-    <span class="section-label">Mission / Vision / Value</span>
-    <h2>私たちの理念</h2>
+<!-- 使命 -->
+<section id="mission">
+  <div class="mission-label fade-in">Mission</div>
+  <h2 class="mission-title fade-in">日本を照らす、<br><span>パチンカス</span>となる。</h2>
+  <p class="mission-sub fade-in">
+    私たちは、パチンコへの狂気も似た情熱を原動力に、誰よりも深く台と向き合い続ける組織です。
+    その魂で産業を見つめ、関わるすべての人々の<strong style="color:var(--accent2)">希望の光</strong>となることを目指しています。
+  </p>
+  <div class="mission-divider fade-in"></div>
+  <p class="fade-in" style="font-size:0.88rem; color:rgba(255,255,255,0.45); letter-spacing:0.15em; text-transform:uppercase;">
+    「パチンカス」とは、ここでは蔑称にあらず。<br>
+    <span style="color:rgba(255,255,255,0.7); font-style:italic;">誰よりもパチンコを愛し、誰よりも真剣に日本の未来を照らす者たちへの、最大の賛辞である。</span>
+  </p>
+</section>
+
+<!-- 玉道 -->
+<section id="tamado">
+  <div class="tamado-label fade-in">玉道 — The Way of the Ball</div>
+  <h2 class="tamado-heading fade-in">志がすべて</h2>
+  <div class="tamado-grid">
+    <div class="tamado-card fade-in">
+      <div class="tamado-num">壱</div>
+      <h4>玉質剛健</h4>
+      <p>一球入魂。放つ玉に魂を込め、盤面と真摯に向き合う姿勢を貫く。</p>
+    </div>
+    <div class="tamado-card fade-in" style="transition-delay:0.08s;">
+      <div class="tamado-num">弍</div>
+      <h4>凡打徹底</h4>
+      <p>派手さより継続。地道な打ち込みの積み重ねが、真の実力を生む。</p>
+    </div>
+    <div class="tamado-card fade-in" style="transition-delay:0.16s;">
+      <div class="tamado-num">参</div>
+      <h4>爆速連打</h4>
+      <p>チャンスに即応する瞬発力。好機を逃さない判断と行動の速度で勝機を掴む。</p>
+    </div>
+    <div class="tamado-card fade-in" style="transition-delay:0.24s;">
+      <div class="tamado-num">肆</div>
+      <h4>圧倒的意識</h4>
+      <p>常に最高を求める意志。妥協を捨て、圧倒的な熱量で場を支配する。</p>
+    </div>
+    <div class="tamado-card fade-in" style="transition-delay:0.32s;">
+      <div class="tamado-num">伍</div>
+      <h4>一致団結</h4>
+      <p>個の限界を超えるのはチームの力。全員の志が揃ったとき、奇跡が生まれる。</p>
+    </div>
   </div>
-  <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:2rem; max-width:960px; margin:0 auto;">
-    <div class="fade-in" style="background:#fff; border-radius:var(--radius); padding:2.5rem 2rem; box-shadow:var(--shadow); text-align:center; border-top:4px solid var(--accent);">
-      <div style="font-size:2.4rem; margin-bottom:1rem;">🏆</div>
-      <div style="font-size:0.78rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--gray); margin-bottom:0.6rem;">Mission</div>
-      <h3 style="font-size:1.3rem; font-weight:900; color:var(--primary);">日本一のパチンカス</h3>
-    </div>
-    <div class="fade-in" style="background:#fff; border-radius:var(--radius); padding:2.5rem 2rem; box-shadow:var(--shadow); text-align:center; border-top:4px solid var(--accent2); transition-delay:0.1s;">
-      <div style="font-size:2.4rem; margin-bottom:1rem;">💪</div>
-      <div style="font-size:0.78rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--gray); margin-bottom:0.6rem;">Vision</div>
-      <h3 style="font-size:1.3rem; font-weight:900; color:var(--primary);">負けない</h3>
-    </div>
-    <div class="fade-in" style="background:#fff; border-radius:var(--radius); padding:2.5rem 2rem; box-shadow:var(--shadow); text-align:center; border-top:4px solid #f59e0b; transition-delay:0.2s;">
-      <div style="font-size:2.4rem; margin-bottom:1rem;">💰</div>
-      <div style="font-size:0.78rem; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--gray); margin-bottom:0.6rem;">Value</div>
-      <h3 style="font-size:1.3rem; font-weight:900; color:var(--primary);">勝つまで投資</h3>
-    </div>
+  <div class="tamado-quote fade-in">
+    <p>
+      「パチンカス」とは、ここでは蔑称にあらず。<br>
+      誰よりもパチンコを愛し、誰よりも真剣に日本の未来を照らす者たちへの、<strong>最大の賛辞である。</strong>
+    </p>
   </div>
 </section>
 
