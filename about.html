@@ -6,22 +6,252 @@
   <title>会社概要 | 株式会社パチンカス</title>
   <link rel="stylesheet" href="common.css">
   <style>
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1000px; margin: 0 auto; align-items: center; }
-    @media(max-width:768px){ .about-grid { grid-template-columns: 1fr; gap: 2rem; } }
     .about-table { width: 100%; border-collapse: collapse; }
     .about-table tr { border-bottom: 1px solid #e5e7eb; }
     .about-table th { padding: 1rem; text-align: left; font-size: 0.85rem; font-weight: 700; color: var(--primary); background: var(--light); width: 35%; }
     .about-table td { padding: 1rem; font-size: 0.95rem; color: var(--dark); }
-    .president-card { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; max-width: 800px; margin: 0 auto; display: grid; grid-template-columns: 280px 1fr; }
+
+    .president-card {
+      background: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      max-width: 800px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+    }
     @media(max-width:768px){ .president-card { grid-template-columns: 1fr; } }
     .president-card img { width: 100%; height: 100%; object-fit: cover; object-position: top; min-height: 320px; }
     .president-text { padding: 2.5rem; }
     .president-text h3 { font-size: 1.4rem; font-weight: 900; color: var(--primary); margin-bottom: 0.3rem; }
     .president-text .role { font-size: 0.85rem; color: var(--accent); font-weight: 700; margin-bottom: 1.5rem; }
     .president-text p { font-size: 0.95rem; line-height: 2; color: var(--gray); margin-bottom: 1rem; }
-    .message-box { background: var(--primary); color: #fff; border-radius: var(--radius); padding: 2rem 2.5rem; margin-top: 1.5rem; }
+
+    .message-box {
+      background: var(--primary);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 2rem 2.5rem;
+      margin-top: 1.5rem;
+    }
     .message-box p { font-size: 1rem; line-height: 1.9; }
     .message-box .quote { font-size: 1.1rem; font-weight: 700; color: var(--accent2); margin-top: 1rem; line-height: 1.7; }
+
+    /* ===== AI事業セクション ===== */
+    #ai-about {
+      background: linear-gradient(180deg, #060612 0%, #0d1b3e 60%, #060612 100%);
+      color: #fff;
+      padding: 100px 5vw;
+      position: relative;
+      overflow: hidden;
+    }
+    #ai-about::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 15% 40%, rgba(99,102,241,0.13) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 60%, rgba(251,191,36,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .ai-about-label {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      border: 1px solid rgba(251,191,36,0.4);
+      padding: 0.3rem 1.2rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+    }
+    .ai-about-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 1.2rem;
+    }
+    .ai-about-title span { color: var(--accent2); }
+    .ai-about-lead {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 2;
+      max-width: 700px;
+      margin: 0 auto 4rem;
+    }
+
+    .ai-spec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto 5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .ai-spec-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.35s;
+    }
+    .ai-spec-card:hover {
+      background: rgba(255,255,255,0.06);
+      transform: translateY(-6px);
+      border-color: rgba(255,255,255,0.18);
+    }
+    .ai-spec-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 20px 20px 0 0;
+    }
+    .ai-spec-card.c1::after { background: linear-gradient(90deg, #6366f1, #a855f7); }
+    .ai-spec-card.c2::after { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+    .ai-spec-card.c3::after { background: linear-gradient(90deg, #10b981, #06b6d4); }
+    .ai-spec-icon { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+    .ai-spec-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 0.2rem 0.8rem;
+      border-radius: 50px;
+      margin-bottom: 1rem;
+    }
+    .badge-slot     { background: rgba(99,102,241,0.2); color: #a5b4fc; }
+    .badge-pachinko { background: rgba(245,158,11,0.2); color: #fcd34d; }
+    .badge-event    { background: rgba(16,185,129,0.2); color: #6ee7b7; }
+    .ai-spec-card h3 {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 1.2rem;
+      line-height: 1.4;
+    }
+    .ai-spec-list { list-style: none; padding: 0; margin: 0 0 1.5rem; }
+    .ai-spec-list li {
+      font-size: 0.87rem;
+      color: rgba(255,255,255,0.62);
+      padding: 0.55rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      line-height: 1.6;
+    }
+    .ai-spec-list li:last-child { border-bottom: none; }
+    .ai-spec-list li::before { content: '▸'; color: var(--accent2); flex-shrink: 0; margin-top: 2px; }
+
+    .ai-tech-stack {
+      max-width: 860px;
+      margin: 0 auto 5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .ai-tech-title {
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+    }
+    .tech-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .tech-layer {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: rgba(251,191,36,0.7);
+      text-transform: uppercase;
+    }
+    .tech-name {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .tech-desc {
+      font-size: 0.74rem;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.5;
+    }
+
+    .ai-monetize {
+      max-width: 860px;
+      margin: 0 auto 4rem;
+      position: relative;
+      z-index: 1;
+    }
+    .ai-monetize-title {
+      text-align: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+    }
+    .monetize-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .monetize-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .monetize-card:hover { background: rgba(255,255,255,0.07); transform: translateY(-4px); }
+    .monetize-card .m-icon { font-size: 2rem; margin-bottom: 0.8rem; display: block; }
+    .monetize-card h4 { font-size: 0.95rem; font-weight: 700; color: #fff; margin-bottom: 0.6rem; }
+    .monetize-card p { font-size: 0.8rem; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+    .ai-disclaimer {
+      max-width: 720px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 2rem 2.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .ai-disclaimer h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .ai-disclaimer p {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 2;
+    }
   </style>
 </head>
 <body>
@@ -45,7 +275,7 @@
   <h1>会社概要</h1>
 </div>
 
-<!-- 会社情報テーブル -->
+<!-- 会社情報 -->
 <section>
   <div class="section-header fade-in">
     <span class="section-label">Company Info</span>
@@ -56,8 +286,8 @@
       <tr><th>会社名</th><td>株式会社パチンカス</td></tr>
       <tr><th>代表取締役</th><td>浦山 公介</td></tr>
       <tr><th>設立</th><td>2024年</td></tr>
-      <tr><th>事業内容</th><td>パチンコをただ楽しむ組織としての活動全般</td></tr>
-      <tr><th>ミッション</th><td>日本一のパチンカス</td></tr>
+      <tr><th>事業内容</th><td>パチンコ・パチスロ活動全般 / パチスロ特化型AIアプリケーション開発・運営</td></tr>
+      <tr><th>ミッション</th><td>日本を照らす、パチンカスとなる。</td></tr>
       <tr><th>ビジョン</th><td>負けない</td></tr>
       <tr><th>バリュー</th><td>勝つまで投資</td></tr>
     </table>
@@ -76,7 +306,7 @@
       <h3>浦山 公介</h3>
       <div class="role">代表取締役</div>
       <p>日本一のパチンカスを目指し、株式会社パチンカスを設立。「負けない」という強い信念のもと、メンバーを牽引し続ける。台選びの直感と圧倒的なリーダーシップで組織を率いる。</p>
-      <p>「勝つまで投資する」という精神を体現し、どんな状況でも諦めない姿勢がメンバーから絶大な信頼を得ている。</p>
+      <p>「勝つまで投資する」という精神を体現し、どんな状況でも諦めない姿勢がメンバーから絶大な信頼を得ている。パチンコへの情熱をAI技術と融合させ、業界に新たな価値を生み出すことを次なる使命と捉え、精力的に事業を推進中。</p>
     </div>
   </div>
 </section>
@@ -91,6 +321,7 @@
     <div class="message-box">
       <p>パチンコは単なるギャンブルではない。台を読む力、状況を判断する力、そして何より「諦めない心」を鍛える最高の道場だと私は思っています。</p>
       <p style="margin-top:1rem;">この組織は、そんなパチンコをただ純粋に楽しみながら、日本一を目指す仲間の集まりです。勝ち負けより大切なのは、最後まで投資し続ける精神。それが私たちの文化です。</p>
+      <p style="margin-top:1rem;">そして今、私たちはその情熱をテクノロジーへと昇華させます。長年培ったパチスロの知識とAIを掛け合わせた新しいプロダクトで、この業界に本物の革命を起こします。</p>
       <div class="quote">「給料は払えないけど、お金じゃ買えないものが当社にはある。」</div>
     </div>
   </div>
@@ -103,8 +334,128 @@
     <h2>新卒の学生へ</h2>
   </div>
   <div style="max-width:760px; margin:0 auto; text-align:center;" class="fade-in">
-    <p style="font-size:1.05rem; line-height:2; color:var(--gray); margin-bottom:2rem;">給料は払えません。でも、ここにはお金では絶対に買えないものがあります。仲間、経験、そして「負けない心」。それを一緒に育てていきましょう。</p>
+    <p style="font-size:1.05rem; line-height:2; color:var(--gray); margin-bottom:2rem;">給料は払えません。でも、ここにはお金では絶対に買えないものがあります。仲間、経験、そして「負けない心」。パチンコへの情熱がAIビジネスへと繋がるこの環境で、一緒に日本を照らしましょう。</p>
     <a href="recruit.html" class="btn btn-primary">採用情報を見る</a>
+  </div>
+</section>
+
+<!-- AI事業概要 -->
+<section id="ai-about">
+  <div style="text-align:center; position:relative; z-index:1;">
+    <div class="ai-about-label fade-in">AI Business</div>
+    <h2 class="ai-about-title fade-in">パチスロ特化型<br><span>AIアプリケーション</span>開発</h2>
+    <p class="ai-about-lead fade-in">
+      株式会社パチンカスは、パチンコ・パチスロ業界に特化したAIプロダクトの開発を主要事業として推進しています。
+      長年の実戦データと最先端の機械学習技術を組み合わせることで、これまで「勘」と「経験」に頼るしかなかった台選びを、
+      データサイエンスの力で科学的に支援します。
+    </p>
+  </div>
+
+  <!-- 3機能カード -->
+  <div class="ai-spec-grid">
+    <div class="ai-spec-card c1 fade-in">
+      <span class="ai-spec-icon">🎰</span>
+      <span class="ai-spec-badge badge-slot">SLOT VERSION</span>
+      <h3>スロット特化チャットAI<br>＆設定判別エンジン</h3>
+      <ul class="ai-spec-list">
+        <li>機種名を入力するだけでAT仕様・設定差・小役確率・狙い目を即時解説</li>
+        <li>ゲーム数・ボーナス回数・小役カウントからベイズ推定で各設定の出現確率をリアルタイム算出</li>
+        <li>「打つべきか・見送るべきか」をAIが確率ベースで明確にアドバイス</li>
+        <li>RAG技術により新機種情報にも継続対応、データベースを常時自動更新</li>
+      </ul>
+    </div>
+    <div class="ai-spec-card c2 fade-in" style="transition-delay:0.1s;">
+      <span class="ai-spec-icon">🎯</span>
+      <span class="ai-spec-badge badge-pachinko">PACHINKO VERSION</span>
+      <h3>ボーダー理論×AI<br>確率予測エンジン</h3>
+      <ul class="ai-spec-list">
+        <li>大当り確率・平均出玉・交換率から正確なボーダーラインを自動計算</li>
+        <li>実測回転数と比較し期待収支を算出、「打つべき台」をリアルタイム判定</li>
+        <li>持ち玉・予算・プレイ時間から最適な立ち回りをシミュレーション</li>
+        <li>確率収束グラフで長期的な期待値を視覚化、根拠ある判断を支援</li>
+      </ul>
+    </div>
+    <div class="ai-spec-card c3 fade-in" style="transition-delay:0.2s;">
+      <span class="ai-spec-icon">📍</span>
+      <span class="ai-spec-badge badge-event">EVENT PREDICTION</span>
+      <h3>全国ホール<br>イベント予測AI</h3>
+      <ul class="ai-spec-list">
+        <li>全国パチンコホールの過去出玉データ・イベント履歴をAIが継続学習</li>
+        <li>「その日・そのホール・どの台番号が高設定か」を確率スコアで可視化</li>
+        <li>SNS告知・周年記念・出し渋りパターンを総合判断し予測精度を向上</li>
+        <li>お気に入りホールのイベント予測をプッシュ通知でリアルタイム配信</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 技術スタック -->
+  <div class="ai-tech-stack fade-in">
+    <div class="ai-tech-title">Technology Stack</div>
+    <div class="tech-grid">
+      <div class="tech-item">
+        <span class="tech-layer">Frontend</span>
+        <span class="tech-name">Next.js 14</span>
+        <span class="tech-desc">TypeScript / App Router対応</span>
+      </div>
+      <div class="tech-item">
+        <span class="tech-layer">Styling</span>
+        <span class="tech-name">Tailwind CSS</span>
+        <span class="tech-desc">shadcn/ui コンポーネント</span>
+      </div>
+      <div class="tech-item">
+        <span class="tech-layer">Backend</span>
+        <span class="tech-name">FastAPI</span>
+        <span class="tech-desc">Python / 非同期処理対応</span>
+      </div>
+      <div class="tech-item">
+        <span class="tech-layer">Database</span>
+        <span class="tech-name">Supabase</span>
+        <span class="tech-desc">PostgreSQL / pgvector対応</span>
+      </div>
+      <div class="tech-item">
+        <span class="tech-layer">AI / LLM</span>
+        <span class="tech-name">GPT-4o / Claude</span>
+        <span class="tech-desc">RAG + ベイズ推定エンジン</span>
+      </div>
+      <div class="tech-item">
+        <span class="tech-layer">Hosting</span>
+        <span class="tech-name">Vercel + Railway</span>
+        <span class="tech-desc">フロント + バックエンド分離</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 収益化モデル -->
+  <div class="ai-monetize fade-in">
+    <div class="ai-monetize-title">Revenue Model</div>
+    <div class="monetize-grid">
+      <div class="monetize-card">
+        <span class="m-icon">🆓</span>
+        <h4>フリープラン</h4>
+        <p>台の特徴チャット・基本ボーダー計算を無料開放。まずは使ってもらい、価値を体感してもらうことを優先します。</p>
+      </div>
+      <div class="monetize-card">
+        <span class="m-icon">👑</span>
+        <h4>プレミアムプラン</h4>
+        <p>設定判別AIの詳細分析・イベント予測の全国対応・お気に入りホールのプッシュ通知など上位機能を月額提供。</p>
+      </div>
+      <div class="monetize-card">
+        <span class="m-icon">🤝</span>
+        <h4>メディア連携</h4>
+        <p>パチスロ関連メディアとのアフィリエイト提携や、ホール向けB2Bデータ提供サービスも将来的に展開予定。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 免責・注意事項 -->
+  <div class="ai-disclaimer fade-in">
+    <h4>Legal Notice</h4>
+    <p>
+      本アプリケーションが提供するすべての予測・分析結果は確率論に基づくものであり、勝利を保証するものではありません。
+      スクレイピングは各サービスの利用規約を厳守した上で実施します。
+      アプリ内には依存症相談窓口へのリンク・自己排除機能・1日の利用制限機能を設置し、
+      社会的責任を果たした設計を行います。18歳未満のアクセスは年齢確認機能により遮断します。
+    </p>
   </div>
 </section>
 

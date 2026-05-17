@@ -41,9 +41,7 @@
       margin-bottom: 1.5rem;
       letter-spacing: 0.05em;
     }
-    .mission-title span {
-      color: var(--accent2);
-    }
+    .mission-title span { color: var(--accent2); }
     .mission-sub {
       font-size: 1rem;
       line-height: 2;
@@ -136,8 +134,219 @@
       line-height: 2;
       color: rgba(255,255,255,0.85);
     }
-    .tamado-quote strong {
+    .tamado-quote strong { color: var(--accent2); }
+
+    /* ===== AI事業セクション ===== */
+    #ai-business {
+      background: linear-gradient(180deg, #060612 0%, #0d1b3e 50%, #060612 100%);
+      color: #fff;
+      padding: 100px 5vw;
+      position: relative;
+      overflow: hidden;
+    }
+    #ai-business::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(99,102,241,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(251,191,36,0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .ai-section-label {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
       color: var(--accent2);
+      border: 1px solid rgba(251,191,36,0.4);
+      padding: 0.3rem 1.2rem;
+      border-radius: 50px;
+      margin-bottom: 1.5rem;
+    }
+    .ai-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 1.2rem;
+      letter-spacing: 0.03em;
+    }
+    .ai-title span { color: var(--accent2); }
+    .ai-subtitle {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.9;
+      max-width: 680px;
+      margin: 0 auto 4rem;
+    }
+    .ai-features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto 4rem;
+      position: relative;
+      z-index: 1;
+    }
+    .ai-feature-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      transition: all 0.35s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .ai-feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 20px 20px 0 0;
+    }
+    .ai-feature-card.slot::before  { background: linear-gradient(90deg, #6366f1, #a855f7); }
+    .ai-feature-card.pachinko::before { background: linear-gradient(90deg, #f59e0b, #ef4444); }
+    .ai-feature-card.event::before  { background: linear-gradient(90deg, #10b981, #06b6d4); }
+    .ai-feature-card:hover {
+      background: rgba(255,255,255,0.06);
+      transform: translateY(-8px);
+      border-color: rgba(255,255,255,0.2);
+    }
+    .ai-card-icon {
+      font-size: 2.8rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+    .ai-card-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      padding: 0.2rem 0.8rem;
+      border-radius: 50px;
+      margin-bottom: 1rem;
+    }
+    .tag-slot     { background: rgba(99,102,241,0.2); color: #a5b4fc; }
+    .tag-pachinko { background: rgba(245,158,11,0.2); color: #fcd34d; }
+    .tag-event    { background: rgba(16,185,129,0.2); color: #6ee7b7; }
+    .ai-feature-card h3 {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 1rem;
+      line-height: 1.4;
+    }
+    .ai-feature-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .ai-feature-card ul li {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.65);
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      line-height: 1.6;
+    }
+    .ai-feature-card ul li:last-child { border-bottom: none; }
+    .ai-feature-card ul li::before {
+      content: '▸';
+      color: var(--accent2);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .ai-roadmap {
+      max-width: 860px;
+      margin: 0 auto 4rem;
+      position: relative;
+      z-index: 1;
+    }
+    .ai-roadmap-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .roadmap-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 0;
+      position: relative;
+    }
+    .roadmap-steps::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, rgba(99,102,241,0.3), rgba(251,191,36,0.3));
+    }
+    .roadmap-step {
+      text-align: center;
+      padding: 0 0.5rem;
+      position: relative;
+    }
+    .roadmap-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent2);
+      margin: 0 auto 1rem;
+      border: 2px solid #0a0a1a;
+      box-shadow: 0 0 0 3px rgba(251,191,36,0.3);
+      position: relative;
+      z-index: 1;
+    }
+    .roadmap-step.done .roadmap-dot { background: #6366f1; box-shadow: 0 0 0 3px rgba(99,102,241,0.3); }
+    .roadmap-phase {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--accent2);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.3rem;
+    }
+    .roadmap-step h4 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 0.3rem;
+      line-height: 1.4;
+    }
+    .roadmap-step p {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.5;
+    }
+    .ai-cta-box {
+      max-width: 720px;
+      margin: 0 auto;
+      background: rgba(251,191,36,0.06);
+      border: 1px solid rgba(251,191,36,0.25);
+      border-radius: 20px;
+      padding: 3rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .ai-cta-box h3 {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .ai-cta-box p {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.8;
+      margin-bottom: 2rem;
     }
   </style>
 </head>
@@ -170,7 +379,7 @@
   <div style="position:relative; z-index:1; max-width:800px;">
     <div style="display:inline-block; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.25); border-radius:50px; padding:0.4rem 1.2rem; font-size:0.85rem; margin-bottom:1.5rem; letter-spacing:0.08em;">PACHINKAS Co., Ltd.</div>
     <h1 style="font-size:clamp(2rem,5vw,3.5rem); font-weight:900; line-height:1.2; margin-bottom:1.2rem;">日本一の<br><span style="color:var(--accent2)">パチンカス</span>を目指して</h1>
-    <p style="font-size:1.1rem; opacity:0.85; margin-bottom:2.5rem; line-height:1.8;">パチンコをただ楽しむ組織として、<br>勝つまで投資し続ける精神で歩み続けます。</p>
+    <p style="font-size:1.1rem; opacity:0.85; margin-bottom:2.5rem; line-height:1.8;">パチンコへの情熱をテクノロジーで昇華させ、<br>日本を照らすパチンカスとなることを目指します。</p>
     <div style="display:flex; justify-content:center; gap:3rem; flex-wrap:wrap; margin-bottom:2.5rem;">
       <div style="text-align:center;"><div style="font-size:2.2rem; font-weight:900; color:var(--accent2); font-family:'Inter',sans-serif;">6</div><div style="font-size:0.8rem; opacity:0.75; margin-top:0.2rem;">メンバー数</div></div>
       <div style="text-align:center;"><div style="font-size:2.2rem; font-weight:900; color:var(--accent2); font-family:'Inter',sans-serif;">0%</div><div style="font-size:0.8rem; opacity:0.75; margin-top:0.2rem;">諦め率</div></div>
@@ -193,7 +402,7 @@
     その魂で産業を見つめ、関わるすべての人々の<strong style="color:var(--accent2)">希望の光</strong>となることを目指しています。
   </p>
   <div class="mission-divider fade-in"></div>
-  <p class="fade-in" style="font-size:0.88rem; color:rgba(255,255,255,0.45); letter-spacing:0.15em; text-transform:uppercase;">
+  <p class="fade-in" style="font-size:0.88rem; color:rgba(255,255,255,0.45); letter-spacing:0.15em;">
     「パチンカス」とは、ここでは蔑称にあらず。<br>
     <span style="color:rgba(255,255,255,0.7); font-style:italic;">誰よりもパチンコを愛し、誰よりも真剣に日本の未来を照らす者たちへの、最大の賛辞である。</span>
   </p>
@@ -238,6 +447,103 @@
   </div>
 </section>
 
+<!-- AI事業 -->
+<section id="ai-business">
+  <div style="text-align:center; position:relative; z-index:1;">
+    <div class="ai-section-label fade-in">AI Business</div>
+    <h2 class="ai-title fade-in">パチンコ×AIで、<br><span>業界に革命を起こす。</span></h2>
+    <p class="ai-subtitle fade-in">
+      長年培ってきたパチンコへの圧倒的な知識と情熱を、最先端のAI技術と融合させる。
+      台の特徴解析から設定判別、ホールイベント予測まで——すべてを一つのプラットフォームに統合した、
+      これまでにないパチスロ特化型AIアプリケーションを開発中です。
+    </p>
+  </div>
+
+  <div class="ai-features-grid">
+    <!-- スロット -->
+    <div class="ai-feature-card slot fade-in">
+      <span class="ai-card-icon">🎰</span>
+      <span class="ai-card-tag tag-slot">SLOT VERSION</span>
+      <h3>スロット特化<br>チャットAI</h3>
+      <ul>
+        <li>機種名を入力するだけで、AT仕様・設定差・小役確率・狙い目をAIが即時解説</li>
+        <li>ゲーム数・ボーナス回数・小役カウントを入力すると、ベイズ推定により各設定の確率をリアルタイム算出</li>
+        <li>「打つべきか・見送るべきか」をAIが確率ベースで明確にアドバイス</li>
+      </ul>
+    </div>
+    <!-- パチンコ -->
+    <div class="ai-feature-card pachinko fade-in" style="transition-delay:0.1s;">
+      <span class="ai-card-icon">🎯</span>
+      <span class="ai-card-tag tag-pachinko">PACHINKO VERSION</span>
+      <h3>ボーダー理論<br>確率予測エンジン</h3>
+      <ul>
+        <li>大当り確率・平均出玉・交換率から正確なボーダーラインを自動計算</li>
+        <li>実測回転数と比較し、期待収支と「打つべき台」をリアルタイム判定</li>
+        <li>持ち玉・予算・プレイ時間から最適な立ち回りをシミュレーション</li>
+      </ul>
+    </div>
+    <!-- イベント -->
+    <div class="ai-feature-card event fade-in" style="transition-delay:0.2s;">
+      <span class="ai-card-icon">📍</span>
+      <span class="ai-card-tag tag-event">EVENT PREDICTION</span>
+      <h3>全国ホール<br>イベント予測AI</h3>
+      <ul>
+        <li>全国のパチンコホールの過去出玉データ・イベント履歴をAIが学習・分析</li>
+        <li>「その日・そのホール・どの台番号が高設定か」を確率スコアで可視化</li>
+        <li>SNS告知・周年イベント・出し渋りパターンを総合判断し予測精度を向上</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ロードマップ -->
+  <div class="ai-roadmap fade-in">
+    <div class="ai-roadmap-title">Development Roadmap</div>
+    <div class="roadmap-steps">
+      <div class="roadmap-step">
+        <div class="roadmap-dot" style="background:#6366f1; box-shadow:0 0 0 3px rgba(99,102,241,0.3);"></div>
+        <div class="roadmap-phase">Phase 1</div>
+        <h4>基盤構築</h4>
+        <p>DB設計・機種データ収集・基本チャット</p>
+      </div>
+      <div class="roadmap-step">
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-phase">Phase 2</div>
+        <h4>判別エンジン</h4>
+        <p>設定判別・ボーダー計算ツール完成</p>
+      </div>
+      <div class="roadmap-step">
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-phase">Phase 3</div>
+        <h4>イベント予測</h4>
+        <p>AIモデル構築・スクレイパー整備</p>
+      </div>
+      <div class="roadmap-step">
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-phase">Phase 4</div>
+        <h4>UI完成</h4>
+        <p>最終仕上げ・β版リリース</p>
+      </div>
+      <div class="roadmap-step">
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-phase">Phase 5</div>
+        <h4>本格展開</h4>
+        <p>フィードバック収集・精度向上・マネタイズ</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTAボックス -->
+  <div class="ai-cta-box fade-in">
+    <h3>ベータ版テスターを募集中</h3>
+    <p>
+      現在、アプリケーションの初期テスターを募集しています。<br>
+      パチンコ・パチスロに情熱を持つ方であれば、経験不問で大歓迎です。<br>
+      一緒に業界の未来を切り拓きましょう。
+    </p>
+    <a href="contact.html" class="btn btn-primary">テスターに応募する</a>
+  </div>
+</section>
+
 <!-- NEWS PICKUP -->
 <section>
   <div class="section-header fade-in">
@@ -246,11 +552,16 @@
   </div>
   <div style="max-width:760px; margin:0 auto; display:flex; flex-direction:column; gap:1rem;">
     <div class="fade-in" style="display:flex; align-items:flex-start; gap:1.2rem; padding:1.3rem 1.5rem; background:#fff; border-radius:var(--radius); box-shadow:var(--shadow);">
+      <span style="font-size:0.82rem; color:var(--gray); min-width:90px; font-family:'Inter',sans-serif; padding-top:3px;">2026.05.17</span>
+      <span style="font-size:0.72rem; font-weight:700; padding:0.2rem 0.7rem; border-radius:50px; background:#d1fae5; color:#065f46; white-space:nowrap;">AI事業</span>
+      <span style="font-size:0.95rem; font-weight:500;">パチスロ特化型AIアプリケーションの開発を正式発表。β版テスター募集開始。</span>
+    </div>
+    <div class="fade-in" style="display:flex; align-items:flex-start; gap:1.2rem; padding:1.3rem 1.5rem; background:#fff; border-radius:var(--radius); box-shadow:var(--shadow); transition-delay:0.05s;">
       <span style="font-size:0.82rem; color:var(--gray); min-width:90px; font-family:'Inter',sans-serif; padding-top:3px;">2026.05.15</span>
       <span style="font-size:0.72rem; font-weight:700; padding:0.2rem 0.7rem; border-radius:50px; background:#dbeafe; color:#1d4ed8; white-space:nowrap;">プレスリリース</span>
       <span style="font-size:0.95rem; font-weight:500;">塚本智史が一般社員として入社。代表・浦山が底知れぬ才能を見込み採用。</span>
     </div>
-    <div class="fade-in" style="display:flex; align-items:flex-start; gap:1.2rem; padding:1.3rem 1.5rem; background:#fff; border-radius:var(--radius); box-shadow:var(--shadow); transition-delay:0.05s;">
+    <div class="fade-in" style="display:flex; align-items:flex-start; gap:1.2rem; padding:1.3rem 1.5rem; background:#fff; border-radius:var(--radius); box-shadow:var(--shadow); transition-delay:0.1s;">
       <span style="font-size:0.82rem; color:var(--gray); min-width:90px; font-family:'Inter',sans-serif; padding-top:3px;">2026.05.15</span>
       <span style="font-size:0.72rem; font-weight:700; padding:0.2rem 0.7rem; border-radius:50px; background:#dbeafe; color:#1d4ed8; white-space:nowrap;">プレスリリース</span>
       <span style="font-size:0.95rem; font-weight:500;">秘書・坂本奈央が入社。通称「永遠のビギナーズラッカー」が組織に加わる。</span>
