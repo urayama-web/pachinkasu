@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>細川を避けろ！</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-user-select:none; user-select:none; -webkit-tap-highlight-color:transparent; }
+  html,body { width:100%; height:100%; overflow:hidden; background:#11131a; font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif; }
+  #wrap { position:relative; width:100vw; height:100vh; touch-action:none; }
+  canvas { display:block; background:linear-gradient(180deg,#1d2030,#0c0e15); width:100%; height:100%; }
+
+  .overlay { position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;
+             color:#fff; text-align:center; padding:24px; background:rgba(10,12,18,.85); }
+  .hidden { display:none !important; }
+  h1 { font-size:26px; margin-bottom:6px; letter-spacing:1px; }
+  .sub { font-size:14px; color:#9aa3b8; margin-bottom:22px; line-height:1.6; }
+  .btn { width:240px; max-width:80vw; padding:14px; margin:7px 0; border:none; border-radius:14px;
+         font-size:17px; font-weight:bold; color:#fff; cursor:pointer; }
+  .b1{background:#2e9e5b;} .b2{background:#2f7bd6;} .b3{background:#d8762a;} .b4{background:#c43b3b;}
+  .restart{background:#444c63; width:200px;}
+  .lvtag{font-size:12px; opacity:.8; display:block; margin-top:2px;}
+  #result{font-size:18px; margin:14px 0; line-height:1.7;}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <canvas id="cv"></canvas>
+
+  <!-- スタート画面 -->
+  <div id="menu" class="overlay">
+    <h1>細川を避けろ！</h1>
+    <p class="sub">指でなぞって自キャラを動かし、細川と<br>「眠りビーム」を1分間avoid しよう。<br>ライフは3つ。難易度を選んでスタート！</p>
+    <button class="btn b1" data-mode="0">① 優しい<span class="lvtag">のんびり練習モード</span></button>
+    <button class="btn b2" data-mode="1">② 普通<span class="lvtag">ちょうどいい歯ごたえ</span></button>
+    <button class="btn b3" data-mode="2">③ 結構難しい<span class="lvtag">油断すると即やられる</span></button>
+    <button class="btn b4" data-mode="3">④ 取り急ぎハード<span class="lvtag">弾幕地獄・覚悟せよ</span></button>
+  </div>
+
+  <!-- ゲームオーバー / クリア画面 -->
+  <div id="end" class="overlay hidden">
+    <h1 id="endTitle"></h1>
+    <div id="result"></div>
+    <button class="btn restart" id="retryBtn">もう一度あそぶ</button>
+  </div>
+</div>
+
+<script>
+const cv  = document.getElementById('cv');
+const ctx = cv.getContext('2d');
+let W, H, DPR;
+
+function resize(){
+  DPR = window.devicePixelRatio || 1;
+  W = window.innerWidth; H = window.innerHeight;
+  cv.width = W*DPR; cv.height = H*DPR;
+  cv.style.width = W+'px'; cv.style.height = H+'px';
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+window.addEventListener('resize', resize);
+resize();
+
+/* ===== 画像読み込み（無くても色付き図形でフォールバック） ===== */
+const imgs = {};
+function loadImg(key, src){
+  const im = new Image();
+  im.onload = ()=> imgs[key]={img:im, ok:true};
+  im.onerror= ()=> imgs[key]={img:null, ok:false};
+  im.src = src;
+  imgs[key] = {img:null, ok:false};
+}
+loadImg('hosokawa','hosokawa.png');
+loadImg('player','player.png');
+loadImg('gameover','gameover.png');
+
+/* ===== 難易度設定 ===== */
+// 各値は「ゲーム開始直後」の基準。経過時間で難化する。
+const MODES = [
+  // 優しい
+  { name:'優しい',        enemySpeed:1.4, beamInterval:1500, beamSpeed:2.4, enemySize:64, ramp:0.6 },
+  // 普通
+  { name:'普通',          enemySpeed:2.0, beamInterval:1050, beamSpeed:3.2, enemySize:60, ramp:1.0 },
+  // 結構難しい
+  { name:'結構難しい',    enemySpeed:2.7, beamInterval:750,  beamSpeed:4.2, enemySize:56, ramp:1.4 },
+  // 取り急ぎハード
+  { name:'取り急ぎハード',enemySpeed:3.4, beamInterval:480,  beamSpeed:5.2, enemySize:52, ramp:1.9 },
+];
+
+const GAME_TIME = 60000; // 1分耐久(ms)
+
+/* ===== ゲーム状態 ===== */
+let state = 'menu';     // menu / playing / end
+let cfg, lives, startTime, lastBeam, beams, enemy, player, animId, flashUntil;
+
+function startGame(modeIndex){
+  cfg = MODES[modeIndex];
+  lives = 3;
+  beams = [];
+  startTime = performance.now();
+  lastBeam = startTime;
+  flashUntil = 0;
+
+  const ps = 50;
+  player = { x:W/2, y:H*0.78, r:ps/2, size:ps, targetX:W/2, targetY:H*0.78, invincibleUntil:0 };
+
+  enemy = {
+    x:W/2, y:H*0.18, size:cfg.enemySize, r:cfg.enemySize/2,
+    vx:(Math.random()<.5?-1:1)*cfg.enemySpeed,
+    vy:(Math.random()<.5?-1:1)*cfg.enemySpeed*0.7
+  };
+
+  document.getElementById('menu').classList.add('hidden');
+  document.getElementById('end').classList.add('hidden');
+  state = 'playing';
+  cancelAnimationFrame(animId);
+  loop();
+}
+
+/* 経過に応じた難化倍率 (1.0 → 最大2倍くらい) */
+function difficultyFactor(elapsed){
+  return 1 + (elapsed/GAME_TIME) * cfg.ramp;
+}
+
+/* ===== 入力（指でなぞる） ===== */
+function pointerMove(clientX, clientY){
+  if(state!=='playing') return;
+  player.targetX = clientX;
+  player.targetY = clientY;
+}
+cv.addEventListener('touchstart', e=>{ const t=e.touches[0]; pointerMove(t.clientX,t.clientY); }, {passive:true});
+cv.addEventListener('touchmove',  e=>{ const t=e.touches[0]; pointerMove(t.clientX,t.clientY); e.preventDefault(); }, {passive:false});
+cv.addEventListener('mousedown',  e=>pointerMove(e.clientX,e.clientY));
+cv.addEventListener('mousemove',  e=>{ if(e.buttons) pointerMove(e.clientX,e.clientY); });
+
+/* ===== 弾(眠りビーム)発射 ===== */
+function fireBeam(now){
+  const f = difficultyFactor(now-startTime);
+  // 自キャラに向けて発射 + 難易度が上がるとばらまき本数増
+  const baseAngle = Math.atan2(player.y-enemy.y, player.x-enemy.x);
+  const spread = (cfg===MODES[3]||cfg===MODES[2]) ? 3 : 1;
+  const sp = cfg.beamSpeed * f;
+  for(let i=0;i<spread;i++){
+    const off = (i-(spread-1)/2)*0.28;
+    const a = baseAngle+off;
+    beams.push({ x:enemy.x, y:enemy.y, vx:Math.cos(a)*sp, vy:Math.sin(a)*sp, r:9 });
+  }
+}
+
+/* ===== メインループ ===== */
+function loop(){
+  const now = performance.now();
+  const elapsed = now - startTime;
+  const f = difficultyFactor(elapsed);
+
+  // --- update ---
+  // プレイヤーは指の位置へ滑らかに追従
+  player.x += (player.targetX - player.x)*0.35;
+  player.y += (player.targetY - player.y)*0.35;
+  player.x = Math.max(player.r, Math.min(W-player.r, player.x));
+  player.y = Math.max(player.r, Math.min(H-player.r, player.y));
+
+  // 細川の移動（壁で反射）
+  enemy.x += enemy.vx*f;
+  enemy.y += enemy.vy*f;
+  if(enemy.x<enemy.r){ enemy.x=enemy.r; enemy.vx*=-1; }
+  if(enemy.x>W-enemy.r){ enemy.x=W-enemy.r; enemy.vx*=-1; }
+  if(enemy.y<enemy.r){ enemy.y=enemy.r; enemy.vy*=-1; }
+  if(enemy.y>H*0.55){ enemy.y=H*0.55; enemy.vy*=-1; } // 下半分には来ない
+
+  // ビーム発射
+  const interval = cfg.beamInterval / f;
+  if(now - lastBeam > interval){ fireBeam(now); lastBeam = now; }
+
+  // ビーム移動
+  for(const b of beams){ b.x+=b.vx; b.y+=b.vy; }
+  beams = beams.filter(b=> b.x>-40 && b.x<W+40 && b.y>-40 && b.y<H+40);
+
+  // 当たり判定（無敵時間中は判定しない）
+  const inv = now < player.invincibleUntil;
+  if(!inv){
+    // 細川本体
+    if(dist(player,enemy) < player.r+enemy.r*0.7){ hit(now); }
+    // ビーム
+    for(const b of beams){
+      if(dist(player,b) < player.r+b.r){ hit(now); b.dead=true; }
+    }
+    beams = beams.filter(b=>!b.dead);
+  }
+
+  // クリア判定
+  if(elapsed >= GAME_TIME){ endGame(true); return; }
+
+  // --- draw ---
+  draw(now, elapsed);
+  animId = requestAnimationFrame(loop);
+}
+
+function dist(a,b){ return Math.hypot(a.x-b.x, a.y-b.y); }
+
+function hit(now){
+  lives--;
+  player.invincibleUntil = now + 1200; // 1.2秒無敵
+  flashUntil = now + 200;
+  if(lives<=0){ endGame(false); }
+}
+
+/* ===== 描画 ===== */
+function drawSprite(key, x, y, size, fallbackColor, label){
+  const o = imgs[key];
+  if(o && o.ok){
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(x,y,size/2,0,Math.PI*2);
+    ctx.closePath();
+    ctx.clip();
+    ctx.drawImage(o.img, x-size/2, y-size/2, size, size);
+    ctx.restore();
+    ctx.beginPath(); ctx.arc(x,y,size/2,0,Math.PI*2);
+    ctx.lineWidth=3; ctx.strokeStyle='rgba(255,255,255,.85)'; ctx.stroke();
+  } else {
+    ctx.beginPath(); ctx.arc(x,y,size/2,0,Math.PI*2);
+    ctx.fillStyle=fallbackColor; ctx.fill();
+    ctx.fillStyle='#fff'; ctx.font='bold 13px sans-serif';
+    ctx.textAlign='center'; ctx.textBaseline='middle';
+    ctx.fillText(label, x, y);
+  }
+}
+
+function draw(now, elapsed){
+  ctx.clearRect(0,0,W,H);
+
+  // 残り時間バー
+  const remain = Math.max(0, GAME_TIME-elapsed);
+  ctx.fillStyle='rgba(255,255,255,.12)';
+  ctx.fillRect(16,16,W-32,10);
+  ctx.fillStyle='#4fd2ff';
+  ctx.fillRect(16,16,(W-32)*(remain/GAME_TIME),10);
+  ctx.fillStyle='#fff'; ctx.font='bold 15px sans-serif'; ctx.textAlign='left'; ctx.textBaseline='top';
+  ctx.fillText('残り '+Math.ceil(remain/1000)+'秒', 16, 34);
+
+  // ライフ
+  ctx.textAlign='right';
+  ctx.fillText('♥'.repeat(lives)+'♡'.repeat(3-lives), W-16, 34);
+
+  // ビーム（眠りビーム＝紫の光）
+  for(const b of beams){
+    ctx.beginPath();
+    const g=ctx.createRadialGradient(b.x,b.y,0,b.x,b.y,b.r*2);
+    g.addColorStop(0,'#d6a8ff'); g.addColorStop(1,'rgba(150,80,255,0)');
+    ctx.fillStyle=g; ctx.arc(b.x,b.y,b.r*2,0,Math.PI*2); ctx.fill();
+    ctx.beginPath(); ctx.fillStyle='#b97bff'; ctx.arc(b.x,b.y,b.r,0,Math.PI*2); ctx.fill();
+  }
+
+  // 細川
+  drawSprite('hosokawa', enemy.x, enemy.y, enemy.size, '#c43b3b', '細川');
+
+  // プレイヤー（無敵中は点滅）
+  const inv = now < player.invincibleUntil;
+  if(!inv || Math.floor(now/100)%2===0){
+    drawSprite('player', player.x, player.y, player.size, '#2f7bd6', 'YOU');
+  }
+
+  // 被弾フラッシュ
+  if(now < flashUntil){
+    ctx.fillStyle='rgba(255,60,60,.35)';
+    ctx.fillRect(0,0,W,H);
+  }
+}
+
+/* ===== 終了処理 ===== */
+function endGame(cleared){
+  state='end';
+  cancelAnimationFrame(animId);
+  const endDiv = document.getElementById('end');
+  const title  = document.getElementById('endTitle');
+  const result = document.getElementById('result');
+
+  if(cleared){
+    title.textContent='🎉 CLEAR!';
+    result.innerHTML = '1分間、見事に細川を避けきった！<br>難易度：'+cfg.name+'<br>残りライフ：♥'+lives;
+    drawClearOrGameover('player','#2f7bd6','SURVIVED');
+  }else{
+    title.textContent='GAME OVER';
+    const survived = Math.min(60, Math.floor((performance.now()-startTime)/1000));
+    result.innerHTML = '細川に捕まった…眠ってしまった💤<br>難易度：'+cfg.name+'<br>生き延びた時間：'+survived+'秒';
+    drawClearOrGameover('gameover','#555','ZZZ...');
+  }
+  endDiv.classList.remove('hidden');
+}
+
+// 終了時にキャンバス中央へ大きく表示
+function drawClearOrGameover(key,color,label){
+  ctx.clearRect(0,0,W,H);
+  drawSprite(key, W/2, H/2, Math.min(W,H)*0.5, color, label);
+}
+
+/* ===== ボタン ===== */
+document.querySelectorAll('#menu .btn').forEach(b=>{
+  b.addEventListener('click', ()=> startGame(parseInt(b.dataset.mode)));
+});
+document.getElementById('retryBtn').addEventListener('click', ()=>{
+  document.getElementById('end').classList.add('hidden');
+  document.getElementById('menu').classList.remove('hidden');
+  state='menu';
+});
+</script>
+</body>
+</html>
